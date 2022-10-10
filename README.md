@@ -34,6 +34,8 @@ Mô tả:
 
 -Folder Models là nơi tạo các field dữ liệu để lưu vào database.
 
+-Trong file appsettings.json config đường dẫn kết nối database MongoDb.
+
 Quá trình tìm hiểu C#, .Net Core:
 
 -Học cơ bản C# như tính kế thừa, các lớp class, namespace, interface...
