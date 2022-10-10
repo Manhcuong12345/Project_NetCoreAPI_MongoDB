@@ -33,7 +33,7 @@ namespace Project_NetCore_MongoDB.Controllers
             {
                 Id = categories.Id,
                 Name = categories.Name,
-                Slug = categories
+                Slug = categories.Slug
             };
 
             if (categories == null)
