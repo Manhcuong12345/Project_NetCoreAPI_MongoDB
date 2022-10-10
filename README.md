@@ -48,6 +48,8 @@ https://xuanthulab.net/lap-trinh-c-co-ban/
 -Đọc tài liệu MongoDB .NET Driver cách kết nối .Net Core với MongoDB, cách truy vấn dữ liệu thông qua MongoDB.
 http://mongodb.github.io/mongo-csharp-driver/2.2/reference/driver/expressions/
 
+-Tìm hiểu về package AutoMapper...
+
 Ưu và nhược điểm của Nodejs và .Net Core:
 
 -Nodejs: được viết bằng ngôn ngữ javascript nên cú pháp thoải mái, không gò bó nhưng dễ gặp lỗi nếu code ẩu và khó fix, hiển thị lỗi không rõ(nếu sử dụng typescript thì dễ fix lỗi, hiển thị rõ lỗi sai ở đâu). Cộng đồng lớn, nhiều gói package hổ trợ. Build dự án chạy nhẹ hơn. Sử dụng trong dự án vừa và nhỏ. Việc tạo swagger ui lâu hơn so với .net core.
