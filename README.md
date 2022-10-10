@@ -26,7 +26,7 @@ Công nghệ,ngôn ngữ:
 
 Mô tả:
 
--Đối với MongoDB khi tạo dữ liệu thì Id tự dộng tạo, không cần nhập Id.
+-Đối với MongoDB khi tạo dữ liệu thì Id tự động tạo, không cần nhập Id.
 
 -Folder Services tạo các class là nơi để chứa các class xử lý logic, có thể gọi một hoặc nhiều repository.
 
