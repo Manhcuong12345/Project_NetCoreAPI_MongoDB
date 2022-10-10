@@ -31,8 +31,9 @@ namespace Project_NetCore_MongoDB.Controllers
 
             var categorieDto = new CategoriesDto
             {
-                Name = categories.Name
-
+                Id = categories.Id,
+                Name = categories.Name,
+                Slug = categories
             };
 
             if (categories == null)
