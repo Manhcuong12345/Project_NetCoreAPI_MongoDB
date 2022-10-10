@@ -50,7 +50,7 @@ http://mongodb.github.io/mongo-csharp-driver/2.2/reference/driver/expressions/
 
 -Nodejs: được viết bằng ngôn ngữ javascript nên cú pháp thoải mái, không gò bó nhưng dễ gặp lỗi nếu code ẩu và khó fix, hiển thị lỗi không rõ(nếu sử dụng typescript thì dễ fix lỗi, hiển thị rõ lỗi sai ở đâu). Cộng đồng lớn, nhiều gói package hổ trợ. Build dự án chạy nhẹ hơn. Sử dụng trong dự án vừa và nhỏ. Việc tạo swagger ui lâu hơn so với .net core.
 
--.Net Core: viết bằng ngôn ngữ C# cách khai báo cú pháp chặt chẽ hơn, hiển thị thông báo lỗi rõ ràng dễ fix hơn so với Nodejs, tính bảo mật cao, thường sử dụng trong dự án lớn. Build project nhanh hơn so với Nodejs,tự tạo swagger nhanh hơn, NodeJs phải cài đặt npm package về swagger. Tạo các file nhanh hơn,tự động import đường dẫn nhanh hơn so vơi NodeJs...
+-.Net Core: viết bằng ngôn ngữ C# cách khai báo cú pháp chặt chẽ hơn, hiển thị thông báo lỗi rõ ràng dễ fix hơn so với Nodejs, tính bảo mật cao, thường sử dụng trong dự án lớn. Build project nhanh hơn so với Nodejs,tự tạo swagger nhanh hơn, NodeJs phải cài đặt npm package về swagger. Tạo các file nhanh hơn,tự động import đường dẫn nhanh hơn so với NodeJs...
 
 Kết quả:
 
