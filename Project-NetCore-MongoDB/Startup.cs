@@ -24,7 +24,7 @@ namespace Project_NetCore_MongoDB
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = ">NET-CORE WITH MongoDB CRUD API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = ".Net Core With MongoDB CRUD API", Version = "v1" });
             });
 
             services.Configure<DbConfiguration>(Configuration.GetSection("MongoDbConnection"));
