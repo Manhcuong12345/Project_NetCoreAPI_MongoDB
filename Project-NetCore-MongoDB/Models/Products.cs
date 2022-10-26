@@ -25,7 +25,7 @@ namespace Project_NetCore_MongoDB.Models
         public double Quantity { get; set; }
 
         [BsonElement("categoriesId")]
-        public string CategoriesId { get; set; }
+        public string? CategoriesId { get; set; }
 
         [BsonElement("categories")]
         public Categories? Categories { get; set; }

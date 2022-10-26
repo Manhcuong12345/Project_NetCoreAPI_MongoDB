@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Project_NetCore_MongoDB.Models;
+using Project_NetCore_MongoDB.Repository.Interface;
 
 namespace Project_NetCore_MongoDB.Repository
 {

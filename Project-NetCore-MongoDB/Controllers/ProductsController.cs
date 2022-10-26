@@ -8,7 +8,7 @@ using AutoMapper;
 
 namespace Project_NetCore_MongoDB.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -36,13 +36,13 @@ namespace Project_NetCore_MongoDB.Controllers
             var data = await _productService.GetByIdAsync(id).ConfigureAwait(false);
             data.Categories = await _categorieService.GetByIdAsync(data.CategoriesId);
 
-            var dataProduct = _mapper.Map<ProductsDto>(data);
+            //var dataProduct = _mapper.Map<ProductsDto>(data);
 
             if (data == null)
             {
                 return NotFound($"Product is not found!");
             }
-            return Ok(dataProduct);
+            return Ok(data);
         }
 
         [HttpPost]

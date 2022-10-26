@@ -2,12 +2,15 @@
 using Project_NetCore_MongoDB.Models;
 using Project_NetCore_MongoDB.Services;
 using Project_NetCore_MongoDB.Dto;
+using Microsoft.AspNetCore.Authorization;
+using Project_NetCore_MongoDB.Common;
+using Newtonsoft.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Project_NetCore_MongoDB.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -18,6 +21,7 @@ namespace Project_NetCore_MongoDB.Controllers
         }
 
         // GET: api/<CountriesController>
+        [Authorize(Policy = "Member")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -29,6 +33,11 @@ namespace Project_NetCore_MongoDB.Controllers
         {
             var categories = await _categorieService.GetByIdAsync(id);
 
+            if (categories == null)
+            {
+                return NotFound($"Categories is not found!");
+            }
+
             var categorieDto = new CategoriesDto
             {
                 Id = categories.Id,
@@ -36,10 +45,7 @@ namespace Project_NetCore_MongoDB.Controllers
                 Slug = categories.Slug
             };
 
-            if (categories == null)
-            {
-                return NotFound();
-            }
+          
             return Ok(categorieDto);
         }
 

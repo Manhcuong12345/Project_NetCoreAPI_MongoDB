@@ -88,3 +88,17 @@ C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\obj\Deb
 C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\obj\Debug\net6.0\Project-NetCore-MongoDB.pdb
 C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\obj\Debug\net6.0\Project-NetCore-MongoDB.genruntimeconfig.cache
 C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\obj\Debug\net6.0\ref\Project-NetCore-MongoDB.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\ACER\Desktop\Project_NetCoreAPI_MongoDB\Project-NetCore-MongoDB\bin\Debug\net6.0\BCrypt.Net-Next.dll
