@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Project_NetCore_MongoDB.Repository.Interface;
 using Project_NetCore_MongoDB.Services.Interface;
 using Project_NetCore_MongoDB.Common;
+using Project_NetCore_MongoDB.Middleware; 
 
 namespace Project_NetCore_MongoDB
 {
@@ -93,42 +94,57 @@ namespace Project_NetCore_MongoDB
                         };
                     });
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Member",
-                   policy => policy.RequireClaim("MembershipId"));
-            });
-
-            //services.AddMvc();
-
             //Midderware
             services.Configure<DbConfiguration>(Configuration.GetSection("MongoDbConnection"));
-            services.AddScoped<IProductsService, ProductsService>();
-            services.AddScoped<IProductsRepository, ProductsRepository>();
 
-            services.AddScoped<ICategoriesService, CategoriesService>();
-            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+            //services.AddTransient<IProductsService, ProductsService>();
+            //services.AddTransient<IProductsRepository, ProductsRepository>();
 
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
+            services.AddTransient<ICategoriesRepository, CategoriesRepository>();
+
+            services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IUsersRepository, UsersRepository>();
+
+            //services.AddTransient<IRolesService, RolesService>();
+            //services.AddTransient<IRolesRepository, RolesRepository>();
+
+            services.AddTransient<ICommentsService, CommentsService>();
+            services.AddTransient<ICommentsRepository, CommentsRepository>();
+
+            services.AddTransient<IArticlesService, ArticlesService>();
+            services.AddTransient<IArticlesRepository, ArticlesRepository>();
 
             services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            // Default Policy
-           
+
+            //Roles Policy
+            services.AddAuthorization(options =>
+            {
+                //options.AddPolicy("AdminPolicy",
+                //policy => policy.RequireRole("Admin"));
+                //To include multiple roles in the policy
+                options.AddPolicy("AdminPolicy",
+                   policy => {
+                       policy.RequireAuthenticatedUser();
+                       policy.RequireClaim("Admin");
+
+                   });
+
+                options.AddPolicy("UserPolicy",
+                  policy => {
+                      policy.RequireAuthenticatedUser();
+                      policy.RequireClaim("User");
+
+                  });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MongoDB CRUD API V1");
-            });
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -138,6 +154,10 @@ namespace Project_NetCore_MongoDB
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
             app.UseCors(builder =>
             {
                 builder
@@ -146,16 +166,22 @@ namespace Project_NetCore_MongoDB
                 .AllowAnyHeader();
             });
 
-           
-            app.UseAuthentication();
-            app.UseAuthorization();
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MongoDB CRUD API V1");
+            });
+
+            app.UseMiddleware<JwtAuth>();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-           // app.UseMvc();
+            
+            // app.UseMvc();
         }
     }
 }

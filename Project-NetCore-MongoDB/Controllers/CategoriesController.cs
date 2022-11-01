@@ -2,9 +2,11 @@
 using Project_NetCore_MongoDB.Models;
 using Project_NetCore_MongoDB.Services;
 using Project_NetCore_MongoDB.Dto;
+using Project_NetCore_MongoDB.Services.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Project_NetCore_MongoDB.Common;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,13 +17,15 @@ namespace Project_NetCore_MongoDB.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoriesService _categorieService;
-        public CategoriesController(ICategoriesService categorieService)
+        private readonly IUsersService _sersvice;
+        public CategoriesController(ICategoriesService categorieService, IUsersService sersvice)
         {
             _categorieService = categorieService;
+            _sersvice = sersvice;
         }
 
         // GET: api/<CountriesController>
-        [Authorize(Policy = "Member")]
+        [Authorize(Policy= "AdminPolicy")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

@@ -4,8 +4,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
+using Project_NetCore_MongoDB.Models;
 
 
 namespace Project_NetCore_MongoDB.Common
@@ -14,6 +16,8 @@ namespace Project_NetCore_MongoDB.Common
     {
         private SecurityKey securityKey = null;
         private string subject = "";
+        private string subject1 = "";
+        private string subject2 = "";
         private string issuer = "";
         private string audience = "";
         private Dictionary<string, string> claims = new Dictionary<string, string>();
@@ -28,6 +32,18 @@ namespace Project_NetCore_MongoDB.Common
         public JwtTokenBuilder AddSubject(string subject)
         {
             this.subject = subject;
+            return this;
+        }
+
+        public JwtTokenBuilder AddSubject1(string subject1)
+        {
+            this.subject1 = subject1;
+            return this;
+        }
+
+        public JwtTokenBuilder AddSubject2(string subject2)
+        {
+            this.subject2 = subject2;
             return this;
         }
 
@@ -60,14 +76,16 @@ namespace Project_NetCore_MongoDB.Common
             this.expiryInMinutes = expiryInMinutes;
             return this;
         }
-
+          
         public JwtToken Build()
         {
             EnsureArguments();
 
             var claims = new List<Claim>
             {
+              new Claim("id", this.subject1),
               new Claim(JwtRegisteredClaimNames.Sub, this.subject),
+              new Claim(JwtRegisteredClaimNames.Email, this.subject2),
               new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             }
             .Union(this.claims.Select(item => new Claim(item.Key, item.Value)));

@@ -17,5 +17,6 @@ namespace Project_NetCore_MongoDB.Common
 
         public DateTime ValidTo => token.ValidTo;
         public string Value => new JwtSecurityTokenHandler().WriteToken(this.token);
+
     }
 }

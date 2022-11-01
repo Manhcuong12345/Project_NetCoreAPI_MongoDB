@@ -6,9 +6,11 @@ namespace Project_NetCore_MongoDB.Models
     {
 
         [BsonElement("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [BsonElement("password")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
+
+       
     }
 }

@@ -1,63 +1,49 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Project_NetCore_MongoDB.Models;
-using Project_NetCore_MongoDB.Repository.Interface;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Project_NetCore_MongoDB.Common;
-using Project_NetCore_MongoDB.Repository;
 using Project_NetCore_MongoDB.Dto;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Project_NetCore_MongoDB.Models;
+using Project_NetCore_MongoDB.Services.Interface;
+using AutoMapper;
 
 namespace Project_NetCore_MongoDB.Controllers
 {
-    [Route("api/auth/login")]
-    [ApiController]
+   [Route("api/users")]
     public class AuthsController : ControllerBase
     {
-        private readonly IAuthRepository _authRepository;   
-        // GET: api/<AuthsController>
+        private readonly IUsersService _usersService;
 
-        public AuthsController(IAuthRepository authRepository)
+        public AuthsController(IUsersService usersService)
         {
-            _authRepository = authRepository;
+            _usersService = usersService;
         }
 
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //  return new string[] { "value1", "value2" };
-        //}
-
-        // GET api/<AuthsController>/5
-        // [HttpGet("{id}")]
-        // public string Get(int id)
-        // {
-        //     return "value";
-        //}
-
-           [HttpPost("users")]
-            public async Task<IActionResult> CreateUser([FromBody] Users user)
+        //[Authorize(Policy = "AdminPolicy")]
+        [HttpPost("register")]
+        public async Task<IActionResult> CreateUser([FromBody] UsersDto user)
+        {
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                   return BadRequest();
-               }
-              
-            //Ma hoa password
-             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
-             var userData = await _authRepository.CreateAsync(user);
+                return BadRequest();
+            }
+            //var userId = HttpContext.User.Claims.First(i => i.Type == "id").Value;
+            //if (userId != user.dataId) return BadRequest(new { message = "Invalid Email" });
+
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+            var userData = await _usersService.RegisterAsync(user);
 
             return Ok(userData);
-            }
+        }
 
         // POST api/<AuthsController>
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AuthsDto user)
         {
-            var userLogin = await _authRepository.LoginUser(user.Email);
+            var userLogin = await _usersService.LoginUser(user.Email);
 
-            if(userLogin == null) return BadRequest(new {message = "Invalid Email"});
-            
-            if(!BCrypt.Net.BCrypt.Verify(user.Password, userLogin.Password))
+            if (userLogin == null) return BadRequest(new { message = "Invalid Email" });
+
+            if (!BCrypt.Net.BCrypt.Verify(user.Password, userLogin.Password))
             {
                 return BadRequest(new { message = "Invalid Password" });
             }
@@ -67,34 +53,19 @@ namespace Project_NetCore_MongoDB.Controllers
                 var token = new JwtTokenBuilder()
                                     .AddSecurityKey(JwtSecurityKey.Create("key-value-token-expires"))
                                     .AddSubject(user.Email)
+                                    .AddSubject1(userLogin.Id)
+                                    .AddSubject2(user.Email)
                                     .AddIssuer("issuerTest")
                                     .AddAudience("bearerTest")
-                                    .AddClaim("MembershipId", "111")
+                                    .AddClaim(userLogin.RolesName.ToString(), "")
                                     .AddExpiry(1)
                                     .Build();
-               // var response = new AuthsDto
-               // {
-                //    Id = user.Id,
-                   // Email = user.Email
-               // };
 
-                return Ok(new { jwt = token.Value});
+                return Ok(new { jwt = token.Value });
 
             }
             else
                 return Unauthorized($"Unauthorized");
         }
-
-        // PUT api/<AuthsController>/5
-       // [HttpPut("{id}")]
-       // public void Put(int id, [FromBody] Users user)
-       // {
-        //}
-
-        // DELETE api/<AuthsController>/5
-       // [HttpDelete("{id}")]
-       // public void Delete(int id)
-       // {
-       // }
     }
 }

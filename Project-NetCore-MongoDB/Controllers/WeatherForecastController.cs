@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Project_NetCore_MongoDB.Models;
+using Project_NetCore_MongoDB.Services.Interface;
 
 namespace Project_NetCore_MongoDB.Controllers
 {
@@ -6,6 +8,7 @@ namespace Project_NetCore_MongoDB.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -29,5 +32,7 @@ namespace Project_NetCore_MongoDB.Controllers
             })
             .ToArray();
         }
+
+       
     }
 }
