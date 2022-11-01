@@ -9,6 +9,6 @@ namespace Project_NetCore_MongoDB.Repository.Interface
         Task<Comments> CreateAsync(Comments comments);
         Task UpdateAsync(string id, Comments comments);
         Task DeleteAsync(string id);
-        Task<List<Comments>> GetAllCommentId(string author);
+        Task<List<Comments>> GetAllCommentId(string articlesId);
     }
 }

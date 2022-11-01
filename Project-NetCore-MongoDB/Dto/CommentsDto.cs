@@ -11,14 +11,14 @@ namespace Project_NetCore_MongoDB.Dto
         public string? Id { get; set; }
 
         [BsonElement("bodyText")]
-        public string BodyText { get; set; }
+        public string? BodyText { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("articlesId")]
-        public string ArticlesId { get; set; }
+        public string? ArticlesId { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("authorId")]
-        public string AuthorId { get; set; }
+        public string? AuthorId { get; set; }
     }
 }

@@ -26,23 +26,18 @@ namespace Project_NetCore_MongoDB.Controllers
         }
         // GET: api/<ArticlesController>
         //[Authorize(Policy = "AdminPolicy")]
-        [HttpGet]
-        public async Task<IActionResult> GetAll(string author)
+        [HttpGet("AllCommentArticleId")]
+        public async Task<IActionResult> GetAll(string articlesId)
         {
-            var articleId = await _articlesService.GetByIdAsync(author);
-
-           //var idData = articleId.AuthorId;
-
-            //string ids = articleId.ToString();
-
-            if (articleId == null){
-                return BadRequest($"Articles is not found");
-            }
-
-            var getAllComment = await _commentsService.GetAllCommentId(articleId.ToString());
+            var getAllComment = await _commentsService.GetAllCommentId(articlesId);
+            if(getAllComment == null)
+            {
+                return BadRequest($"Comment in articles is not found");
+            } 
 
             return Ok(getAllComment);
         }
+
 
         [HttpGet("{id:length(24)}")]
         public async Task<IActionResult> Get(string id)
@@ -60,6 +55,7 @@ namespace Project_NetCore_MongoDB.Controllers
             return Ok(comments);
         }
 
+        [Authorize(Policy = "UserPolicy")]
         [HttpPost]
         public async Task<IActionResult> Create(CommentsDto comments)
         {
@@ -68,20 +64,20 @@ namespace Project_NetCore_MongoDB.Controllers
                 return BadRequest();
             }
 
-            var articles = await _articlesService.GetByIdAsync(comments.ArticlesId).ConfigureAwait(false);
-            if(articles == null)
+            var userTokenId = HttpContext.User.Claims.First(i => i.Type == "id").Value; ;
+            //check kiem tra _id cua user va authorId khi nhap gia tri tao, neu khong khop tra ve loi
+            if (userTokenId == null)
             {
-                return BadRequest($"Articles is not found");
+                return BadRequest(new { message = "Not authorized to create this articles" });
             }
 
-            var userTokenId = HttpContext.User.Claims.First(i => i.Type == "id").Value; ;
             comments.AuthorId = userTokenId;
-
             var commentData = await _commentsService.CreateAsync(comments);
 
             return CreatedAtAction(nameof(Get), new { id = commentData.Id }, commentData);
         }
 
+        [Authorize(Policy = "UserPolicy")]
         [HttpPut("{id:length(24)}")]
         public async Task<IActionResult> Update(string id, CommentsDto comments)
         {
@@ -104,6 +100,7 @@ namespace Project_NetCore_MongoDB.Controllers
             return CreatedAtAction(nameof(Get), new { id = comments.Id }, comments);
         }
 
+        [Authorize(Policy = "UserPolicy")]
         [HttpDelete("{id:length(24)}")]
         public async Task<IActionResult> Delete(string id)
         {

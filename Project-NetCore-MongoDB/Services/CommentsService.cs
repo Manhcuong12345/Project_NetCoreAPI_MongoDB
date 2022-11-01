@@ -21,9 +21,9 @@ namespace Project_NetCore_MongoDB.Services
             return _commentsRepository.GetAllAsync();
         }
 
-        public Task<List<Comments>> GetAllCommentId(string author)
+        public Task<List<Comments>> GetAllCommentId(string articlesId)
         {
-            return _commentsRepository.GetAllCommentId(author);
+            return _commentsRepository.GetAllCommentId(articlesId);
         }
 
 

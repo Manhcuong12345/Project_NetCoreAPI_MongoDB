@@ -26,9 +26,9 @@ namespace Project_NetCore_MongoDB.Repository
         {
             return _collection.Find(c => c.Id == id).FirstOrDefaultAsync();
         }
-        public Task<List<Comments>> GetAllCommentId(string id)
+        public Task<List<Comments>> GetAllCommentId(string articlesId)
         {
-            return _collection.Find(c => true).ToListAsync();
+            return _collection.Find(c => c.ArticlesId == articlesId).ToListAsync();
         }
 
         public async Task<Comments> CreateAsync(Comments comments)
