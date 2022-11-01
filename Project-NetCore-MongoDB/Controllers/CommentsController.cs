@@ -96,7 +96,7 @@ namespace Project_NetCore_MongoDB.Controllers
             //check Id author in artiles vs id token login user. If worng then error. True continue
             if (userIdToken != data.AuthorId)
             {
-                return BadRequest($"Not authorized to update this comments");
+                return BadRequest(new { message = "Not authorized to update this comments" });
             }
 
             await _commentsService.UpdateAsync(id, comments);
@@ -118,7 +118,7 @@ namespace Project_NetCore_MongoDB.Controllers
             //check Id author in artiles vs id token login user. If worng then error. True continue
             if (userIdToken != comments.AuthorId)
             {
-                return BadRequest($"Not authorized to update this comments");
+                return BadRequest(new { message = "Not authorized to delete this comments" });
             }
 
             await _commentsService.DeleteAsync(id).ConfigureAwait(false);

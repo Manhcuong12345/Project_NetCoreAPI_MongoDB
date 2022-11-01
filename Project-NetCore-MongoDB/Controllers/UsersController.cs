@@ -18,15 +18,12 @@ namespace Project_NetCore_MongoDB.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-       // private readonly IUsersService _usersService;
-        private readonly IRolesService _rolesService;
         private readonly IUsersService _usersService;
         // GET: api/<AuthsController>
 
-        public UsersController(IUsersService usersService, IRolesService rolesService)
+        public UsersController(IUsersService usersService)
         {
             _usersService = usersService;
-            _rolesService = rolesService;
         }
 
         [Authorize(Policy = "AdminPolicy")]

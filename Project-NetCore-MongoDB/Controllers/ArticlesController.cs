@@ -66,7 +66,7 @@ namespace Project_NetCore_MongoDB.Controllers
             //check kiem tra _id cua user va authorId khi nhap gia tri tao, neu khong khop tra ve loi
             if(userId == null)
             {
-                return BadRequest($"Not authorized to create this articles");
+                return BadRequest(new {message = "Not authorized to create this articles"});
             }
 
             articles.AuthorId = userId;
@@ -89,7 +89,7 @@ namespace Project_NetCore_MongoDB.Controllers
             //check Id author in artiles vs id token login user. If worng then error. True continue
             if (userIdToken != data.AuthorId)
             {
-                return BadRequest($"Not authorized to update this articles");
+                return BadRequest(new { message = "Not authorized to update this articles" });
             }
        
             await _articlesService.UpdateAsync(id, articles);
@@ -112,7 +112,7 @@ namespace Project_NetCore_MongoDB.Controllers
             //check Id author in artiles vs id token login user. If worng then error. True continue
             if (userIdToken != articles.AuthorId)
             {
-                return BadRequest($"Not authorized to delete this articles");
+                return BadRequest(new { message = "Not authorized to delete this articles" });
             }
 
             await _articlesService.DeleteAsync(id).ConfigureAwait(false);
