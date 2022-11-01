@@ -27,13 +27,21 @@ namespace Project_NetCore_MongoDB.Controllers
         // GET: api/<ArticlesController>
         //[Authorize(Policy = "AdminPolicy")]
         [HttpGet("AllCommentArticleId")]
-        public async Task<IActionResult> GetAll(string articlesId)
+        public async Task<IActionResult> GetAllCommentArticles(string articlesId)
         {
             var getAllComment = await _commentsService.GetAllCommentId(articlesId);
             if(getAllComment == null)
             {
                 return BadRequest($"Comment in articles is not found");
             } 
+
+            return Ok(getAllComment);
+        }
+
+        [HttpGet()]
+        public async Task<IActionResult> GetAllComment()
+        {
+            var getAllComment = await _commentsService.GetAllAsync();
 
             return Ok(getAllComment);
         }
