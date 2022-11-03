@@ -1,6 +1,6 @@
-# Project_NetCoreAPI_MongoDB
+# Project Blog .Net Core Api MongoDB
 
-Quá trình cài đặt và builder project:
+1. Quá trình cài đặt và builder project:
 
 -B1: Tạo project qua visual studio chọn .Net Core Web Api để tạo project.
 
@@ -12,54 +12,32 @@ Quá trình cài đặt và builder project:
 
 -B5: Sau khi hoàn tất khởi chạy project
 
-Công nghệ,ngôn ngữ:
+2. Công nghệ,ngôn ngữ:
 
 -ngôn ngữ C#
 
 -Cơ sở dữ liệu MongoDB
 
--MongoDB-Compass,GUI
+-Tool MongoDB-Compass,GUI
 
 -GitHub
 
 -ASP.NET Core
 
-Mô tả:
+3. Mô tả API và chức năng:
+- Đối với MongoDB khi tạo dữ liệu thì Id tự động tạo, không cần nhập Id.
+- API Login,Register => Login bao gồm email và password => Kết quả trả về là chuỗi jwt token chứa Id và email của user đó.
+- API User => các phương thức gồm (getAll, post, get by Id, delete, update). Phân quyền gồm user và admin. Admin có quyền thêm xóa sửa cập nhật user.
+- API Articles => các phương thức gồm (getAll, post, get by Id, delete, update). User có quyền thêm xóa sửa cập nhật bài viết. Điều kiện khi cập nhật và xóa bài viết:
+     + Kiểm tra id trong token mà user đăng nhập có trùng với id user đăng bài viết đó có đăng không => Không trùng, không cho phép xóa và cập nhật.
+- API Category => các phương thức gồm (getAll, post, get by Id, delete, update). Admin có quyền thêm xóa sửa cập nhật.
+- API Comment => các phương thức gồm (getAll, getCommentToArticlesId ,post, getId, delete, update) => User được quyền thêm, xóa, sửa comments. Điều kiện khi cập nhật và xóa bài viết:
+     + Kiểm tra id trong token mà user đăng nhập có trùng với id user bình luận viết đó có đăng không => Không trùng, không cho phép xóa và cập nhật.
 
--Đối với MongoDB khi tạo dữ liệu thì Id tự động tạo, không cần nhập Id.
+4. Bản thiết kế database, API, mô hình ERD
+- Link file thiết kế
+https://app.diagrams.net/#G1sru78WHHEO96tPGYY-0w04YB4HvugbvH
 
--Folder Services tạo các class là nơi để chứa các class xử lý logic, có thể gọi một hoặc nhiều repository.
-
--Folder Repositorys tạo các class là nơi để tương tác với database, class repository chịu trách nhiệm tương tác một entity tương ứng với database.
-
--Folder Dto tạo class là nơi có thể tùy chỉnh trả về dữ liệu khi thực hiện truy vấn để lấy dữ liệu trả về.
-
--Folder Models là nơi tạo các field dữ liệu để lưu vào database.
-
--Trong file appsettings.json config đường dẫn kết nối database MongoDb.
-
-Quá trình tìm hiểu C#, .Net Core:
-
--Học cơ bản C# như tính kế thừa, các lớp class, namespace, interface...
-https://xuanthulab.net/lap-trinh-c-co-ban/
-
--Tham khảo, đọc tài liệu về cách setup, build hệ thống .net core api trên microsoft, trên google.
-
--Tham khảo source trên github về .net core api.
-
--Đọc tài liệu MongoDB .NET Driver cách kết nối .Net Core với MongoDB, cách truy vấn dữ liệu thông qua MongoDB.
-http://mongodb.github.io/mongo-csharp-driver/2.2/reference/driver/expressions/
-
--Tìm hiểu về package AutoMapper...
-
-Ưu và nhược điểm của Nodejs và .Net Core:
-
--Nodejs: được viết bằng ngôn ngữ javascript nên cú pháp thoải mái, không gò bó nhưng dễ gặp lỗi nếu code ẩu và khó fix, hiển thị lỗi không rõ(nếu sử dụng typescript thì dễ fix lỗi, hiển thị rõ lỗi sai ở đâu). Cộng đồng lớn, nhiều gói package hổ trợ. Build dự án chạy nhẹ hơn. Sử dụng trong dự án vừa và nhỏ. Việc tạo swagger ui lâu hơn so với .net core.
-
--.Net Core: viết bằng ngôn ngữ C# cách khai báo cú pháp chặt chẽ hơn, hiển thị thông báo lỗi rõ ràng dễ fix hơn so với Nodejs, tính bảo mật cao, thường sử dụng trong dự án lớn. Build project nhanh hơn so với Nodejs,tự tạo swagger nhanh hơn, NodeJs phải cài đặt npm package về swagger. Tạo các file nhanh hơn,tự động import đường dẫn nhanh hơn so với NodeJs...
-
-Kết quả:
-
-Deploy Heroku
-
+6. Kết quả:
+- Deploy Heroku tài liệu Swagger
 https://asp-netcore-api-mongodb.herokuapp.com/swagger/index.html
