@@ -79,6 +79,9 @@ namespace Project_NetCore_MongoDB.Controllers
                 return BadRequest(new { message = "Not authorized to create this articles" });
             }
 
+            var artclie = await _articlesService.GetByIdAsync(comments.ArticlesId);
+            if(artclie == null) return BadRequest(new { message = "Articles is not found" });
+
             comments.AuthorId = userTokenId;
             var commentData = await _commentsService.CreateAsync(comments);
 

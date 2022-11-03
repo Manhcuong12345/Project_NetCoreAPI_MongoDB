@@ -38,7 +38,7 @@ namespace Project_NetCore_MongoDB
 
             services.AddSwaggerGen(swagger =>
             {
-                swagger.SwaggerDoc("v1", new OpenApiInfo { Title = ".Net Core With MongoDB CRUD API", Version = "v1" });
+                swagger.SwaggerDoc("v1", new OpenApiInfo { Title = "Blog .Net Core MongoDB", Version = "v1" });
                 // To Enable authorization using Swagger (JWT)    
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
