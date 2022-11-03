@@ -29,10 +29,10 @@
    - Phân quyền gồm user,admin. Khi đăng ký mặc định là user. Admin quản lý user. Không có super admin.
    - API Login,Register => Login bao gồm email và password => Kết quả trả về là chuỗi jwt token chứa Id và email của user đó.
    - API User => các phương thức gồm (getAll, post, get by Id, delete, update). Phân quyền gồm user và admin. Admin có quyền thêm xóa sửa cập nhật user.
-   - API Articles => các phương thức gồm (getAll, post, get by Id, delete, update). User có quyền thêm xóa sửa cập nhật bài viết. Khi tạo bài viết sẽ tự động lưu id        của user đó thông qua token trả về khi đăng nhập tài khoản Điều kiện khi cập nhật và xóa bài          viết:
+   - API Articles => các phương thức gồm (getAll, post, get by Id, delete, update). User có quyền thêm xóa sửa cập nhật bài viết. Khi tạo bài viết sẽ tự động lưu id        của user đó thông qua token trả về khi đăng nhập tài khoản Điều kiện khi cập nhật và xóa bài viết:
         + Kiểm tra id trong token mà user đăng nhập có trùng với id user đăng bài viết đó có đăng không => Không trùng, không cho phép xóa và cập nhật.
    - API Category => các phương thức gồm (getAll, post, get by Id, delete, update). Admin có quyền thêm xóa sửa cập nhật.
-   - API Comment => các phương thức gồm (getAll, getCommentToArticlesId ,post, getId, delete, update) => User được quyền thêm, xóa, sửa comments. Điều kiện khi cập          nhật và xóa bài viết:
+   - API Comment => các phương thức gồm (getAll, getCommentToArticlesId ,post, getId, delete, update) => User được quyền thêm, xóa, sửa comments. Khi tạo comment sẽ        tự động lưu id của user đó thông qua token trả về khi đăng nhập tài khoản. Điều kiện khi cập nhật và xóa bài viết:
         + Kiểm tra id trong token mà user đăng nhập có trùng với id user bình luận viết đó có đăng không => Không trùng, không cho phép xóa và cập nhật.
 
 4. Bản thiết kế database, API, mô hình ERD
