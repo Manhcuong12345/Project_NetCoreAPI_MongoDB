@@ -26,6 +26,7 @@
 
 3. Mô tả API và chức năng:
    - Đối với MongoDB khi tạo dữ liệu thì Id tự động tạo, không cần nhập Id.
+   - Phân quyền gồm user,admin. Khi đăng ký mặc định là user. Admin quản lý user. Không có super admin.
    - API Login,Register => Login bao gồm email và password => Kết quả trả về là chuỗi jwt token chứa Id và email của user đó.
    - API User => các phương thức gồm (getAll, post, get by Id, delete, update). Phân quyền gồm user và admin. Admin có quyền thêm xóa sửa cập nhật user.
    - API Articles => các phương thức gồm (getAll, post, get by Id, delete, update). User có quyền thêm xóa sửa cập nhật bài viết. Điều kiện khi cập nhật và xóa bài          viết:
