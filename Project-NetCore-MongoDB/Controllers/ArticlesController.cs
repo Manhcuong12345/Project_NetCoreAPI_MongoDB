@@ -28,7 +28,7 @@ namespace Project_NetCore_MongoDB.Controllers
             _mapper = mapper;
         }
         // GET: api/<ArticlesController>
-        [Authorize(Policy = "UserPolicy")]
+        //[Authorize(Policy = "UserPolicy")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
